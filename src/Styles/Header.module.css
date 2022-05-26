@@ -1,0 +1,67 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: darkblue;
+    color:white;
+    height: 6vh;
+    font-size: 1.2rem;
+}
+
+.marks {
+    display: flex;
+    gap: 24px;
+}
+
+.mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pic {
+    width: 40px;
+}
+
+.links {
+    padding: 0 12px 0 12px;
+}
+
+.links:hover {
+    font-weight: bold;
+    color:rgb(60, 255, 190)
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        font-size: 0.4rem;
+    }
+
+    .pic {
+        width: 15px;
+    }
+
+    .links {
+        padding: 0 6px 0 6px;
+    }
+
+    .marks {
+        gap: 10px;
+    }
+}
+
+@media screen and (min-width: 3000px) {
+    .container {
+        font-size: 5rem;
+    }
+
+    .pic {
+        width: 150px;
+    }
+}
+
+
+

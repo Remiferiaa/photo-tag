@@ -1,38 +1,36 @@
-import React, {useContext} from "react"
-import { MyGame } from "../Context/Context"
+import React, { useContext} from "react"
+import { MyGame } from "../Constant/Context"
+import style from '../Styles/Choice.module.css'
 
 
-const Choices = () => {
-    const {data, setData, coordNow, setOps,showOps}  = useContext(MyGame)
+const Choices = (props) => {
+    const { data, setData, coordNow, getCursor} = useContext(MyGame)
+    let targ = data.filter(el => el.marked !== true)
 
-    const choiceValid = (item) => {
-        let lens = document.querySelector(".overlay")
+    const choiceValid = (e, item) => {
+        e.stopPropagation();
+        let lens = document.querySelector("#overlay")
+        let img = getCursor(e)
+        let delWidth = (1 + ((1424 - img.width) / img.width))
+        let delHeight = (1 + ((1960.5 - img.height) / img.height))
         let w = lens.offsetWidth / 2
         let h = lens.offsetHeight / 2
-        if((coordNow.x + w > item.x && coordNow.x - w < item.x ) || (coordNow.y + h > item.y && coordNow.y - h < item.y )) {
-            rightChoice(item.id)
+        let x = item.x / delWidth
+        let y = item.y / delHeight
+        if ((coordNow.x + w > x && coordNow.x - w < x) && (coordNow.y + h > y && coordNow.y - h < y)) {
+            setData(data.map(stuff => (stuff.id == `${item.id}` ? {...stuff, marked: true} : stuff )))
         }
-    }
-    
-    const rightChoice = (id) => {
-        setData(data.filter(item => item.id !== id))
-        if(data.length -1  === 0) {
-            alert("YouWin")
-        }
+        props.setter(false)
     }
 
-    const click = (e, item) => {
-        e.stopPropagation();
-        setOps(false)
-        choiceValid(item)
-    }
     return (
-        <div className="options">
-            {data.map((item) => (
-                <button key={item.id} onClick={(e) => click(e, item)}>{item.name}</button>
+        <div className={style.options}>
+            {targ.map((item) => (
+                <button className={style.btn} key={item.id} onClick={(e) => choiceValid(e, item)}>{item.name}</button>
             ))}
         </div>
     )
+    
 }
 
 export default Choices
