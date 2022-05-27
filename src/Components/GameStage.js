@@ -7,11 +7,12 @@ import style from "../Styles/GameStage.module.css"
 import Timer from "./Timer"
 
 const GameStage = () => {
-    const { data, getCursor, imgLink, setGame, gameState, timer } = useContext(MyGame)
+    const { data, getCursor, imgLink, setGame, gameState, timer} = useContext(MyGame)
     const [pos, setPos] = useState({ top: 0, left: 0 })
     const [showOps, setOps] = useState(false)
     const [gameOver, setOver] = useState(false)
     const [name, setName] = useState('')
+    const [wrong, setWrong] = useState(false)
 
     useEffect(() => {
         if (data.every(el => el.marked === true) && data.length > 0) {
@@ -24,9 +25,16 @@ const GameStage = () => {
         setOver(false)
     }, [])
 
+    useEffect(() => {
+        setTimeout(() => {
+            setWrong(false)
+        }, 1500)
+    }, [wrong])
+
+
     const load = () => {
         setGame(true)
-    }
+    } 
 
     const trigOps = () => {
         setOps(true)
@@ -65,11 +73,12 @@ const GameStage = () => {
 
     return (
         <div className={style.holder}>
+            <div className={`${wrong ? `${style.announ} ${style.wrong}` : `${style.announ}`}`} >Try Again!</div>
             <div className={`${gameState ? `${style.overlay}` : ""}`} id="overlay" onMouseMove={(e) => handleMove(e)} onClick={() => trigOps()}
                 style={{
                     left: `${pos.left}px`, top: `${pos.top}px`,
                 }}>
-                {(showOps) ? <Choices setter={setOps} /> : null}
+                {(showOps) ? <Choices setter={setOps} setWrong={setWrong} /> : null}
             </div>
             <div className={`${gameOver ? `${style.resultHolder}` : ""}`}>
                 {(gameOver) ?

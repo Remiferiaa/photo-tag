@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         reset()
-    }, [reset])
+    }, [])
 
     return (
         <div className={style.container}>

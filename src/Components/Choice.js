@@ -18,7 +18,9 @@ const Choices = (props) => {
         let x = item.x / delWidth
         let y = item.y / delHeight
         if ((coordNow.x + w > x && coordNow.x - w < x) && (coordNow.y + h > y && coordNow.y - h < y)) {
-            setData(data.map(stuff => (stuff.id == `${item.id}` ? {...stuff, marked: true} : stuff )))
+            setData(data.map(el => ((el.id === item.id) ? {...el, marked: true} : el )))
+        } else {
+            props.setWrong(true)
         }
         props.setter(false)
     }

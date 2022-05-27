@@ -24,7 +24,11 @@
 .rank {
     display: flex;
     font-size: 1.5rem;
-    margin-bottom: 5px;
+    border: 1.5px solid rgb(204, 204, 204);
+    border-radius: 16px;
+    color:white;
+    background-color: rgba(0, 0, 0, 0.65);
+    margin-bottom: 3px;
 }
 
 .index, .headerIndex {
@@ -39,14 +43,15 @@
     width: 30%;
 }
 
-.index, .name, .record {
-    background-color: rgb(0, 0, 0);
-    color: white;
+.index, .name, .record, 
+.headerIndex, .headerName, .headerRecord { 
+    align-self: center;
+    padding: 6px;
 }
 
 @media screen and (max-width: 1000px) {
     .container {
-        width: 70vw;
+        width: 100vw;
     }
 
     .rank, .header {
