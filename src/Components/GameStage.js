@@ -72,9 +72,9 @@ const GameStage = () => {
     }
 
     return (
-        <div className={style.holder}>
+        <div className={style.holder}  onMouseMove={(e) => handleMove(e)} >
             <div className={`${wrong ? `${style.announ} ${style.wrong}` : `${style.announ}`}`} >Try Again!</div>
-            <div className={`${gameState ? `${style.overlay}` : ""}`} id="overlay" onMouseMove={(e) => handleMove(e)} onClick={() => trigOps()}
+            <div className={`${gameState ? `${style.overlay}` : ""}`} id="overlay" onClick={() => trigOps()}
                 style={{
                     left: `${pos.left}px`, top: `${pos.top}px`,
                 }}>
